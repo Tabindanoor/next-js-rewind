@@ -19,7 +19,7 @@ export default async function PostDetailPage({ params }: Props) {
   );
 
   const post: Post = await res.json();
-  console.log(post)
+
   return (
     <div>
       <h1>{post.title}</h1>
