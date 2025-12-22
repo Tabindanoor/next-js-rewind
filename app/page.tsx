@@ -37,7 +37,7 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        {/* <section className="py-24 sm:py-32">
+        <section className="py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-2xl lg:text-center">
               <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400">
@@ -126,7 +126,7 @@ export default function Home() {
               </dl>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* CTA Section */}
         {/* <section className="bg-gray-900 dark:bg-black">
