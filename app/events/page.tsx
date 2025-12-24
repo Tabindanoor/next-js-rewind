@@ -1,7 +1,6 @@
 export const dynamic = "force-static";
 import Link from "next/link";
 import data from "../../data/data.json";
-import { log } from "node:console";
 import Image from "next/image";
 
 type EventCategory = {
@@ -11,11 +10,11 @@ type EventCategory = {
   image: string;
 };
 
-export default function Page() {
+export default function EventsMainPage() {
   const { events_categories } = data as {
     events_categories: EventCategory[];
   };
-  console.log(events_categories);
+  // console.log(events_categories);
   
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -23,8 +22,6 @@ export default function Page() {
         Events
       </h1>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-       
-      
         {events_categories.map((cat) => (
           <div
             key={cat.id}
