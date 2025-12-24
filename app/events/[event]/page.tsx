@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { readFile } from "fs/promises";
-import { join } from "path";
 import { notFound } from "next/navigation";
+import data from "../../../data/data.json";
 
 type EventCategory = {
   id: string;
@@ -22,25 +21,22 @@ type Event = {
 
 type Props = {
   params: Promise<{
-    id: string;
+    event: string;
   }>;
 };
 
 export default async function SingleDynamic({ params }: Props) {
-  const { id } = await params; 
-  console.log(id,"these are params")
+  const { event } = await params;
+  // console.log(event, "these are params");
 
-  // Load data
-  const filePath = join(process.cwd(), "data", "data.json");
-  const fileContents = await readFile(filePath, "utf8");
-  const data = JSON.parse(fileContents) as {
+  const { events_categories, allEvents } = data as {
     events_categories: EventCategory[];
     allEvents: Event[];
   };
 
   // Find the category matching the ID
-  const category = data.events_categories.find(
-    (cat) => cat.id === id
+  const category = events_categories.find(
+    (cat) => cat.id === event
   );
 
   // If category not found, show 404
@@ -48,22 +44,22 @@ export default async function SingleDynamic({ params }: Props) {
     notFound();
   }
 
-  // Filter events by city (case-insensitive match)
-  const cityEvents = data.allEvents.filter(
-    (event) => event.city.toLowerCase() === id.toLowerCase()
-  );
+  // Filter events by city - normalize case for comparison
+  const cityEvents = allEvents.filter((ev) => {
+    return ev.city.toLowerCase() === event.toLowerCase();
+  }); 
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       {/* Category Header */}
       <div className="mb-8">
         <div className="relative h-64 w-full overflow-hidden rounded-lg">
-          {/* <Image
+          <Image
             src={category.image}
             alt={category.title}
             fill
             className="object-cover"
-          /> */}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8">
             <h1 className="text-4xl font-bold text-white">
@@ -97,36 +93,36 @@ export default async function SingleDynamic({ params }: Props) {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cityEvents.map((event) => {
-            const registeredCount = event.emails_registered.filter(
+          {cityEvents.map((ev) => {
+            const registeredCount = ev.emails_registered.filter(
               (email) => email !== ""
             ).length;
 
             return (
               <Link
-                key={event.id}
-                href={`/events/${id}/${event.id}`}
+                key={ev.id}
+                href={`/events/${event}/${ev.id}`}
                 className="group flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-gray-800 dark:bg-gray-800"
               >
-                {/* <div className="relative h-48 w-full overflow-hidden">
+                <div className="relative h-48 w-full overflow-hidden">
                   <Image
-                    src={event.image}
-                    alt={event.title}
+                    src={ev.image}
+                    alt={ev.title}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                </div> */}
+                </div>
                 <div className="flex flex-1 flex-col p-6">
                   <div className="mb-2">
                     <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
-                      {event.city}
+                      {ev.city}
                     </span>
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    {event.title}
+                    {ev.title}
                   </h3>
                   <p className="mt-2 flex-1 text-sm leading-6 text-gray-600 dark:text-gray-300 line-clamp-2">
-                    {event.description}
+                    {ev.description}
                   </p>
                   <div className="mt-4 flex items-center justify-between">
                     <span className="text-sm text-gray-500 dark:text-gray-400">
