@@ -121,6 +121,8 @@ export default async function EventDetails({ params }: Props) {
             Browse All Cities
           </Link>
         </div>
+        <input type="email" />
+        <button type="submit">submit</button>
       </div>
     </div>
   );
