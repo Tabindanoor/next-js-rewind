@@ -121,8 +121,35 @@ export default async function EventDetails({ params }: Props) {
             Browse All Cities
           </Link>
         </div>
-        <input type="email" />
-        <button type="submit">submit</button>
+
+        {/* Registration Form */}
+        <form className="mt-8 border-t border-gray-200 pt-6 dark:border-gray-700">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+            Register for this event
+          </h2>
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                required
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+              />
+            </div>
+            <button
+              type="submit"
+              aria-label="Register for this event"
+              className="rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Register
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
