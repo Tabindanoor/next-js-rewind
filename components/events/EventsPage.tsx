@@ -1,17 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-
-type EventCategory = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-};
+import type { EventsData } from "../../types/events";
 
 type Props = {
-  data: {
-    events_categories: EventCategory[];
-  };
+  data: EventsData;
 };
 
 export default function EventsPage({ data }: Props) {

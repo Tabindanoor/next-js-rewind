@@ -1,23 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import data from "../../../data/data.json";
-
-type EventCategory = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-};
-
-type Event = {
-  id: string;
-  title: string;
-  city: string;
-  description: string;
-  image: string;
-  emails_registered: string[];
-};
+import type { EventsData } from "../../../types/events";
+import { CategoryHeader, EventCard } from "../../../components/events";
+import { filterEventsByCity } from "../../../utils/events";
 
 type Props = {
   params: Promise<{
@@ -27,17 +13,11 @@ type Props = {
 
 export default async function SingleDynamic({ params }: Props) {
   const { event } = await params;
-  // console.log(event, "these are params");
 
-  const { events_categories, allEvents } = data as {
-    events_categories: EventCategory[];
-    allEvents: Event[];
-  };
+  const { events_categories, allEvents } = data as EventsData;
 
   // Find the category matching the ID
-  const category = events_categories.find(
-    (cat) => cat.id === event
-  );
+  const category = events_categories.find((cat) => cat.id === event);
 
   // If category not found, show 404
   if (!category) {
@@ -45,32 +25,11 @@ export default async function SingleDynamic({ params }: Props) {
   }
 
   // Filter events by city - normalize case for comparison
-  const cityEvents = allEvents.filter((ev) => {
-    return ev.city.toLowerCase() === event.toLowerCase();
-  }); 
+  const cityEvents = filterEventsByCity(allEvents, event); 
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Category Header */}
-      <div className="mb-8">
-        <div className="relative h-64 w-full overflow-hidden rounded-lg">
-          <Image
-            src={category.image}
-            alt={category.title}
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-8">
-            <h1 className="text-4xl font-bold text-white">
-              {category.title}
-            </h1>
-            <p className="mt-2 text-lg text-gray-200">
-              {category.description}
-            </p>
-          </div>
-        </div>
-      </div>
+      <CategoryHeader category={category} />
 
       {/* Events List */}
       <div className="mb-6 flex items-center justify-between">
@@ -93,49 +52,9 @@ export default async function SingleDynamic({ params }: Props) {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cityEvents.map((ev) => {
-            const registeredCount = ev.emails_registered.filter(
-              (email) => email !== ""
-            ).length;
-
-            return (
-              <Link
-                key={ev.id}
-                href={`/events/${event}/${ev.id}`}
-                className="group flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg dark:border-gray-800 dark:bg-gray-800"
-              >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={ev.image}
-                    alt={ev.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="mb-2">
-                    <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
-                      {ev.city}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    {ev.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-6 text-gray-600 dark:text-gray-300 line-clamp-2">
-                    {ev.description}
-                  </p>
-                  <div className="mt-4 flex items-center justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {registeredCount} {registeredCount === 1 ? "attendee" : "attendees"}
-                    </span>
-                    <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 group-hover:underline">
-                      View Details →
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {cityEvents.map((ev) => (
+            <EventCard key={ev.id} event={ev} eventCategory={event} />
+          ))}
         </div>
       )}
     </div>
