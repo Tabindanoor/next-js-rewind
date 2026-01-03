@@ -16,10 +16,8 @@ export default async function SingleDynamic({ params }: Props) {
 
   const { events_categories, allEvents } = data as EventsData;
 
-  // Find the category matching the ID
   const category = events_categories.find((cat) => cat.id === event);
 
-  // If category not found, show 404
   if (!category) {
     notFound();
   }
