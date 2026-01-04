@@ -22,7 +22,6 @@ export default async function SingleDynamic({ params }: Props) {
     notFound();
   }
 
-  // Filter events by city - normalize case for comparison
   const cityEvents = filterEventsByCity(allEvents, event); 
 
   return (
