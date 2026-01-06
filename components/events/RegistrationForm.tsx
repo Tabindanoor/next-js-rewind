@@ -1,5 +1,4 @@
 "use client";
-
 import { FormEvent, useState } from "react";
 
 type RegistrationFormProps = {
@@ -7,10 +6,7 @@ type RegistrationFormProps = {
   onSubmit?: (email: string) => void;
 };
 
-export default function RegistrationForm({
-  eventId,
-  onSubmit,
-}: RegistrationFormProps) {
+export default function RegistrationForm({eventId, onSubmit}: RegistrationFormProps) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{
@@ -25,16 +21,16 @@ export default function RegistrationForm({
 
     try {
       // If custom onSubmit is provided, use it
-      if (onSubmit) {
-        onSubmit(email);
-        setMessage({
-          type: "success",
-          text: "Registration successful!",
-        });
-        setEmail("");
-        setIsLoading(false);
-        return;
-      }
+      // if (onSubmit) {
+      //   onSubmit(email);
+      //   setMessage({
+      //     type: "success",
+      //     text: "Registration successful!",
+      //   });
+      //   setEmail("");
+      //   setIsLoading(false);
+      //   return;
+      // }
 
       // Otherwise, call the API
       const response = await fetch("/api/events/register", {
