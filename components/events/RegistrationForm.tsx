@@ -21,16 +21,16 @@ export default function RegistrationForm({eventId, onSubmit}: RegistrationFormPr
 
     try {
       // If custom onSubmit is provided, use it
-      // if (onSubmit) {
-      //   onSubmit(email);
-      //   setMessage({
-      //     type: "success",
-      //     text: "Registration successful!",
-      //   });
-      //   setEmail("");
-      //   setIsLoading(false);
-      //   return;
-      // }
+      if (onSubmit) {
+        onSubmit(email);
+        setMessage({
+          type: "success",
+          text: "Registration successful!",
+        });
+        setEmail("");
+        setIsLoading(false);
+        return;
+      }
 
       // Otherwise, call the API
       const response = await fetch("/api/events/register", {
