@@ -8,7 +8,7 @@ export default function Header() {
           href="/"
           className="text-xl font-bold text-gray-900 transition-colors hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
         >
-          My App
+          My Full stack App
         </Link>
         <div className="flex items-center gap-6">
           <Link
