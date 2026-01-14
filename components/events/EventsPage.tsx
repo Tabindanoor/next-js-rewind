@@ -25,7 +25,6 @@ export default function EventsPage({ data }: Props) {
           href={`/events/${cat.id}`}
           className="group relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl dark:bg-gray-800"
         >
-          {/* Image Container with Elegant Overlay */}
           <div className="relative h-64 w-full overflow-hidden">
             <Image
               src={cat.image}
