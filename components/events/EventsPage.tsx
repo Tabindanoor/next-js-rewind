@@ -69,7 +69,6 @@ export default function EventsPage({ data }: Props) {
             </div>
           </div>
 
-          {/* Elegant Border Effect */}
           <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-colors duration-300 group-hover:border-blue-200 dark:group-hover:border-blue-800"></div>
         </Link>
       ))}
