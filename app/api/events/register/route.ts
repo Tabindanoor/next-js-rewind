@@ -3,6 +3,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import type { EventsData } from '../../../../types/events';
 
+// async fucntion to check the body if it contains event is or event mail
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
