@@ -24,7 +24,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Read the data file
     const filePath = path.join(process.cwd(), 'data', 'data.json');
     const fileContents = await fs.readFile(filePath, 'utf8');
     const data: EventsData = JSON.parse(fileContents);
