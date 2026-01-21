@@ -28,7 +28,6 @@ export async function POST(request: NextRequest) {
     const fileContents = await fs.readFile(filePath, 'utf8');
     const data: EventsData = JSON.parse(fileContents);
 
-    // Find the event
     const event = data.allEvents.find((ev) => ev.id === eventId);
 
     if (!event) {
