@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if email is already registered
     if (event.emails_registered.includes(email)) {
       return NextResponse.json(
         { error: 'This email is already registered for this event' },
