@@ -38,8 +38,8 @@ export default function EventsPage({ data }: Props) {
             {/* Elegant Badge
             <div className="absolute right-4 top-4 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:bg-white group-hover:shadow-xl dark:bg-gray-900/95 dark:text-white">
               Explore
-            </div>
-          </div> */}
+            </div>*/}
+          </div> 
 
           {/* Content Section */}
           <div className="p-6">
