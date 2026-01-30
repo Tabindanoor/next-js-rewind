@@ -11,9 +11,9 @@ export default function EventStats({
     <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          {/* <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
             Registered Attendees
-          </p>
+          </p> */}
           <p className="mt-1 text-2xl font-bold text-gray-900 dark:text-white">
             {registeredCount}
           </p>
