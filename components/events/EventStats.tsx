@@ -22,9 +22,9 @@ export default function EventStats({
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
             Event ID
           </p>
-          {/* <p className="mt-1 font-mono text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-1 font-mono text-sm text-gray-600 dark:text-gray-400">
             {eventId}
-          </p> */}
+          </p>
         </div>
       </div>
     </div>
